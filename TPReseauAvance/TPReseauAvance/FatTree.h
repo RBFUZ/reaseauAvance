@@ -1,7 +1,17 @@
 #pragma once
+
+#include <fstream>
+
 class FatTree
 {
 public:
-	FatTree(void);
+	FatTree(int k);
+	void printEntete();
+	void printNode();
+	void closeFile();
+
+private:
+	int k, nbServeurAll, nbServeur, nbEdgeAll, nbEdge, nbCore;
+	std::ofstream fichier;
 };
 
