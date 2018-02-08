@@ -31,33 +31,29 @@ void FatTree::printEntete()
 
 void FatTree::printNode()
 {
-	int edge1 = 0, edge2 = 0, edge3 = 1, port = 0, changeSwitch = 0, changePod = 1;
-	for (int i = 0; i < nbServeurAll; i++)
+	int port = 2;
+	// Itération sur l'ensemble des serveurs
+	for (int numNode = 0; numNode < nbServeurAll; numNode++)
 	{
-		fichier << "Hca		1		\"Node(" << i << ")\"" << endl;
-
-		port = port + 2;
-
-		// Changement de switch
-		if (changeSwitch == nbEdge)
+		// Changer de pods
+		for (int pod = 0; pod < k; pod++)
 		{
-			// Changement de pod
-			if (changePod == nbEdge)
+			// Changer de switch
+			for (int swh = 0; swh < nbEdge; swh++)
 			{
-				edge1++;
-				edge2 = -1;
-				changePod = 0;
+				// Créer le nombre de serveur pour un switch
+				for (int hote = 0; hote < nbEdge; hote++)
+				{
+					fichier << "Hca		1		\"Node(" << numNode << ")\"" << endl;
+					fichier << "[1]  \"Edge(" << pod << " " << swh << " 1)\"[" << port << "]" << endl;
+					numNode++;
+					port += 2;
+				}
+				port = 2;
 			}
-			edge2++;
-			changeSwitch = 0;
-			port = 2;
-			changePod++;
 		}
-
-		fichier << "[1]  \"Edge(" << edge1 << " " << edge2 << " " << edge3 << ")\"[" << port << "]" << endl;
-		changeSwitch++;
 	}
-	fichier << endl << endl;
+	fichier << endl;
 }
 
 void FatTree::printSwitchEdge()
