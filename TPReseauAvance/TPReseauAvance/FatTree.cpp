@@ -37,6 +37,17 @@ void FatTree::printNode()
 	}
 }
 
+void FatTree::printSwitchEdge()
+{
+	for (int i = 0; i < k; i++)
+	{
+		for (int j = 0; j < nbEdge; j++)
+		{
+			fichier << "Switch		" << k << "		\"Edge(" << i << " " << j << " 1)\"" << endl;
+		}
+	}
+}
+
 void FatTree::closeFile()
 {
 	fichier.close();
@@ -46,19 +57,20 @@ void FatTree::closeFile()
 int main(int argc, char *argv[])
 {
 	//	Vérifie que 1 argument a été saisi et que la valeur de l'argument est un nb pair >=2
-	if (argc != 2) {
+	if (argc != 2) 
 		cout << "One argument is expected" << endl;
-	}
-	else {
+	else 
+	{
 		// Verifie que le k est pair et superieur Ã  1
 		int k = atoi(argv[1]);
-		if (k % 2 != 0 || k < 2) {
+		if (k % 2 != 0 || k < 2)
 			cout << "The value of the argument is invalid" << endl;
-		}
-		else {
+		else 
+		{
 			FatTree fat(k);
 			fat.printEntete();
 			fat.printNode();
+			fat.printSwitchEdge();
 		}
 	}
 

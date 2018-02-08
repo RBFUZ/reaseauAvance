@@ -8,6 +8,7 @@ public:
 	FatTree(int k);
 	void printEntete();
 	void printNode();
+	void printSwitchEdge();
 	void closeFile();
 
 private:
