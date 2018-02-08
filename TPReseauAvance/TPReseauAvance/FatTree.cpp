@@ -1,4 +1,7 @@
 #include "FatTree.h"
+#include <iostream>
+
+using namespace std;
 
 
 FatTree::FatTree(void)
@@ -6,7 +9,7 @@ FatTree::FatTree(void)
 
 }
 
-void main()
+int main(int argc, char *argv[])
 {
-
+	return 0;
 }
