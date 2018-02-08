@@ -14,4 +14,3 @@ private:
 	int k, nbServeurAll, nbServeur, nbEdgeAll, nbEdge, nbCore;
 	std::ofstream fichier;
 };
-
