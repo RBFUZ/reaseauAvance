@@ -57,7 +57,7 @@ void FatTree::printNode()
 		fichier << "[1]  \"Edge(" << edge1 << " " << edge2 << " " << edge3 << ")\"[" << port << "]" << endl;
 		changeSwitch++;
 	}
-	cout << endl << endl;
+	fichier << endl << endl;
 }
 
 void FatTree::printSwitchEdge()
