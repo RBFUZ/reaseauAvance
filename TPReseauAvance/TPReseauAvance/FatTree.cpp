@@ -49,17 +49,19 @@ int main(int argc, char *argv[])
 	if (argc != 2) {
 		cout << "One argument is expected" << endl;
 	}
+	else {
+		// Vérifie que le k est pair et supérieur à 1
+		int k = atoi(argv[1]);
+		if (k % 2 != 0 || k < 2) {
+			cout << "The value of the argument is invalid" << endl;
+		}
+		else {
+			FatTree fat(k);
 
-	// Vérifie que le k est pair et supérieur à 1
-	int k = atoi(argv[1]);
-	if (k % 2 != 0 || k < 2) {
-		cout << "The value of the argument is invalid" << endl;
+			fat.printEntete();
+			fat.printNode();
+		}
 	}
-
-	FatTree fat(k);
-
-	fat.printEntete();
-	fat.printNode();
 
 	return 0;
 }
