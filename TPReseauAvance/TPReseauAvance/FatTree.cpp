@@ -67,6 +67,36 @@ void FatTree::printSwitchEdge()
 	}
 }
 
+// Génération des liaisons sur les switchs aggrégations
+void FatTree::printSwitchAggr()
+{
+	int indice = 0, port = 2;
+
+	// Une iteration = un pod
+	for (int pod = 0; pod < k; pod++)
+	{
+		// Une iteration = un switch
+		for (int sw = k/2; sw < nbEdge * 2; sw++)
+		{
+			fichier << endl << "Switch		" << k << "		\"Aggr(" << pod << " " << sw << " 1)\"" << endl;
+
+			// Création des noeuds avec les cores et les edges
+			for (int l = 1; l < nbEdge * 2; l++)
+			{
+				fichier << "[" << l << "] \"Core(" << k << " " << port / 2 << " " << indice + 1 << ")[" << pod + 1 << "]" << endl;
+				l++;
+				fichier << "[" << l << "] \"Edge(" << pod << " " << indice << " 1)[" << port - 1 << "]" << endl;
+
+				indice++;
+			}
+			indice = 0;
+			port += 2;
+		}
+		port = 2;
+	}
+}
+
+// Fermeture du fichier
 void FatTree::closeFile()
 {
 	fichier.close();
@@ -90,8 +120,9 @@ int main(int argc, char *argv[])
 			fat.printEntete();
 			fat.printNode();
 			fat.printSwitchEdge();
+			fat.printSwitchAggr();
+			fat.closeFile();
 		}
 	}
-
 	return 0;
 }

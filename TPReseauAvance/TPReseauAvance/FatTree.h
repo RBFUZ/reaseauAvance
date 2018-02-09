@@ -9,6 +9,7 @@ public:
 	void printEntete();
 	void printNode();
 	void printSwitchEdge();
+	void printSwitchAggr();
 	void closeFile();
 
 private:
