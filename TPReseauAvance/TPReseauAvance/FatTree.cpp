@@ -96,6 +96,30 @@ void FatTree::printSwitchAggr()
 	}
 }
 
+// Génération des liaisons avec les switchs aggregations
+void FatTree::printSwitchCore()
+{
+	int port = 1;
+
+	// Une iteration = deux cores
+	for (int pod = 1 ; pod <= nbEdge; pod++)
+	{
+		// Une iteration = un core
+		for (int j = 1; j <= nbEdge; j++)
+		{
+			fichier << endl << "Switch		" << k << "		\"Core(" << k << " " << pod << " " << j << ")" << endl;
+
+			// k iteration
+			for (int i = 0; i < k; i++)
+			{
+				fichier << "[" << i + 1 << "] \"Aggr(" << i << " " << pod + 1 << " 1)[" << port << "]" << endl;
+			}
+			port += 2;
+		}
+		port = 1;
+	}
+}
+
 // Fermeture du fichier
 void FatTree::closeFile()
 {
@@ -121,6 +145,7 @@ int main(int argc, char *argv[])
 			fat.printNode();
 			fat.printSwitchEdge();
 			fat.printSwitchAggr();
+			fat.printSwitchCore();
 			fat.closeFile();
 		}
 	}

@@ -10,6 +10,7 @@ public:
 	void printNode();
 	void printSwitchEdge();
 	void printSwitchAggr();
+	void printSwitchCore();
 	void closeFile();
 
 private:
