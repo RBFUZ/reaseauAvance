@@ -58,11 +58,20 @@ void FatTree::printNode()
 
 void FatTree::printSwitchEdge()
 {
-	for (int i = 0; i < k; i++)
+	for (int iBoucle1 = 0; iBoucle1 < k; iBoucle1++)
 	{
-		for (int j = 0; j < nbEdge; j++)
+		for (int iBoucle2 = 0; iBoucle2 < nbEdge; iBoucle2++)
 		{
-			fichier << "Switch		" << k << "		\"Edge(" << i << " " << j << " 1)\"" << endl;
+			fichier << "Switch		" << k << "		\"Edge(" << iBoucle1 << " " << iBoucle2 << " 1)\"" << endl;
+
+			//Liaison avec chaque aggrégation et serveur
+			for (int iBoucle3 = 0; iBoucle3 < 2 * nbEdge; iBoucle3++)
+			{
+				if (iBoucle3 % 2 == 0)
+					fichier << "[" << iBoucle3 + 1 << "]  \"Aggr(" << iBoucle1 << " " << (k / 2) + iBoucle3 / 2 << " " << 1 << ")\"[" << (iBoucle2 + 1) * 2 << "]" << endl;
+				else
+					fichier << "[" << iBoucle3 + 1 << "]  \"Node(" << (int)(iBoucle3 / 2) << ")\"[1]" << endl;
+			}
 		}
 	}
 }
