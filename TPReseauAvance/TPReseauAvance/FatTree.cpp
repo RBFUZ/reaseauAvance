@@ -113,6 +113,7 @@ void FatTree::printSwitchAggr()
 void FatTree::printSwitchCore()
 {
 	int port = 1;
+	int midCore = k / 2;
 
 	// Une iteration = deux cores
 	for (int pod = 1 ; pod <= nbEdge; pod++)
@@ -125,11 +126,12 @@ void FatTree::printSwitchCore()
 			// k iteration
 			for (int i = 0; i < k; i++)
 			{
-				fichier << "[" << i + 1 << "] \"Aggr(" << i << " " << pod + 1 << " 1)[" << port << "]" << endl;
+				fichier << "[" << i + 1 << "] \"Aggr(" << i << " " << midCore << " 1)[" << port << "]" << endl;
 			}
 			port += 2;
 		}
 		port = 1;
+		midCore++;
 	}
 }
 
