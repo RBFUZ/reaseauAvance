@@ -72,7 +72,7 @@ void FatTree::printSwitchEdge()
 					fichier << "[" << iBoucle3 + 1 << "]  \"Aggr(" << iBoucle1 << " " << (k / 2) + iBoucle3 / 2 << " " << 1 << ")\"[" << (iBoucle2 + 1) * 2 << "]" << endl;
 				else 
 				{
-					fichier << "[" << iBoucle3 + 1 << "]  \"Node(" << /*(int)(iBoucle3 / 2)*/numHost << ")\"[1]" << endl;
+					fichier << "[" << iBoucle3 + 1 << "]  \"Node(" << numHost << ")\"[1]" << endl;
 					numHost++;
 				}
 			}
