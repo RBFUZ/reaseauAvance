@@ -16,7 +16,7 @@ FatTree::FatTree(int nbPod)
 	nbEdge = k / 2;
 	nbCore = int(pow((k / 2), 2));
 
-	// Création et ouverture en écritre du fichier topogen.cpp
+	// CrÃ©ation et ouverture en Ã©critre du fichier topogen.cpp
 	fichier = ofstream("topogen.cpp", ofstream::out);
 }
 
@@ -32,7 +32,7 @@ void FatTree::printEntete()
 void FatTree::printNode()
 {
 	int port = 2;
-	// Itération sur l'ensemble des serveurs
+	// ItÃ©ration sur l'ensemble des serveurs
 	for (int numNode = 0; numNode < nbServeurAll; numNode++)
 	{
 		// Changer de pods
@@ -41,7 +41,7 @@ void FatTree::printNode()
 			// Changer de switch
 			for (int swh = 0; swh < nbEdge; swh++)
 			{
-				// Créer le nombre de serveur pour un switch
+				// CrÃ©er le nombre de serveur pour un switch
 				for (int hote = 0; hote < nbEdge; hote++)
 				{
 					fichier << "Hca		1		\"Node(" << numNode << ")\"" << endl;
@@ -65,7 +65,7 @@ void FatTree::printSwitchEdge()
 		{
 			fichier << "Switch		" << k << "		\"Edge(" << iBoucle1 << " " << iBoucle2 << " 1)\"" << endl;
 
-			//Liaison avec chaque aggrégation et serveur
+			//Liaison avec chaque aggrÃ©gation et serveur
 			for (int iBoucle3 = 0; iBoucle3 < 2 * nbEdge; iBoucle3++)
 			{
 				if (iBoucle3 % 2 == 0)
@@ -80,7 +80,7 @@ void FatTree::printSwitchEdge()
 	}
 }
 
-// Génération des liaisons sur les switchs aggrégations
+// GÃ©nÃ©ration des liaisons sur les switchs aggrÃ©gations
 void FatTree::printSwitchAggr()
 {
 	int indice = 0, port = 2;
@@ -93,7 +93,7 @@ void FatTree::printSwitchAggr()
 		{
 			fichier << endl << "Switch		" << k << "		\"Aggr(" << pod << " " << sw << " 1)\"" << endl;
 
-			// Création des noeuds avec les cores et les edges
+			// CrÃ©ation des noeuds avec les cores et les edges
 			for (int l = 1; l < nbEdge * 2; l++)
 			{
 				fichier << "[" << l << "] \"Core(" << k << " " << port / 2 << " " << indice + 1 << ")[" << pod + 1 << "]" << endl;
@@ -109,7 +109,7 @@ void FatTree::printSwitchAggr()
 	}
 }
 
-// Génération des liaisons avec les switchs aggregations
+// GÃ©nÃ©ration des liaisons avec les switchs aggregations
 void FatTree::printSwitchCore()
 {
 	int port = 1;
@@ -121,7 +121,7 @@ void FatTree::printSwitchCore()
 		// Une iteration = un core
 		for (int j = 1; j <= nbEdge; j++)
 		{
-			fichier << endl << "Switch		" << k << "		\"Core(" << k << " " << pod << " " << j << ")" << endl;
+			fichier << endl << "Switch		" << k << "		\"Core(" << k << " " << pod << " " << j << ")\"" << endl;
 
 			// k iteration
 			for (int i = 0; i < k; i++)
@@ -144,14 +144,14 @@ void FatTree::closeFile()
 
 int main(int argc, char *argv[])
 {
-	//	Vérifie que 1 argument a été saisi et que la valeur de l'argument est un nb pair >=2
+	//	VÃ©rifie que 1 argument a Ã©tÃ© saisi et que la valeur de l'argument est un nb pair >=2
 	if (argc != 2) 
 		cout << "One argument is expected" << endl;
 	else 
 	{
-		// Verifie que le k est pair et superieur Ã  1
+		// Verifie que le k est pair et superieur ÃƒÂ  1
 		int k = atoi(argv[1]);
-		if (k % 2 != 0 || k < 2)
+		if (k % 2 != 0 || k < 4)
 			cout << "The value of the argument is invalid" << endl;
 		else 
 		{
