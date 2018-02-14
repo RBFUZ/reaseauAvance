@@ -96,9 +96,9 @@ void FatTree::printSwitchAggr()
 			// Création des noeuds avec les cores et les edges
 			for (int l = 1; l < nbEdge * 2; l++)
 			{
-				fichier << "[" << l << "] \"Core(" << k << " " << port / 2 << " " << indice + 1 << ")[" << pod + 1 << "]" << endl;
+				fichier << "[" << l << "] \"Core(" << k << " " << port / 2 << " " << indice + 1 << ")\"[" << pod + 1 << "]" << endl;
 				l++;
-				fichier << "[" << l << "] \"Edge(" << pod << " " << indice << " 1)[" << port - 1 << "]" << endl;
+				fichier << "[" << l << "] \"Edge(" << pod << " " << indice << " 1)\"[" << port - 1 << "]" << endl;
 
 				indice++;
 			}
@@ -126,7 +126,7 @@ void FatTree::printSwitchCore()
 			// k iteration
 			for (int i = 0; i < k; i++)
 			{
-				fichier << "[" << i + 1 << "] \"Aggr(" << i << " " << midCore << " 1)[" << port << "]" << endl;
+				fichier << "[" << i + 1 << "] \"Aggr(" << i << " " << midCore << " 1)\"[" << port << "]" << endl;
 			}
 			port += 2;
 		}
