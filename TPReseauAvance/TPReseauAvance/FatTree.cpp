@@ -25,32 +25,29 @@ void FatTree::printEntete()
 	fichier << "#fat topology file." << endl;
 	fichier << "#Value of k = " << k << endl;
 	fichier << "#Total number of hosts = " << nbServeurAll << endl;
-	fichier << "Number of hosts under each switch = " << k / 2 << endl;
+	fichier << "#Number of hosts under each switch = " << k / 2 << endl;
 	fichier << "#############################################################################" << endl;
 }
 
 void FatTree::printNode()
 {
 	int port = 2;
-	// Itération sur l'ensemble des serveurs
-	for (int numNode = 0; numNode < nbServeurAll; numNode++)
+	int numNode = 0;
+
+	// Changer de pods
+	for (int pod = 0; pod < k; pod++)
 	{
-		// Changer de pods
-		for (int pod = 0; pod < k; pod++)
+		// Changer de switch
+		for (int swh = 0; swh < nbEdge; swh++)
 		{
-			// Changer de switch
-			for (int swh = 0; swh < nbEdge; swh++)
+			// Créer le nombre de serveur pour un switch
+			for (int hote = 0; hote < nbEdge; hote++)
 			{
-				// Créer le nombre de serveur pour un switch
-				for (int hote = 0; hote < nbEdge; hote++)
-				{
-					fichier << "Hca		1		\"Node(" << numNode << ")\"" << endl;
-					fichier << "[1]  \"Edge(" << pod << " " << swh << " 1)\"[" << port << "]" << endl;
-					numNode++;
-					port += 2;
-				}
-				port = 2;
+				fichier << "Hca		1		\"Node(" << numNode++ << ")\"" << endl;
+				fichier << "[1]  \"Edge(" << pod << " " << swh << " 1)\"[" << port << "]" << endl;
+				port += 2;
 			}
+			port = 2;
 		}
 	}
 	fichier << endl;
@@ -71,10 +68,7 @@ void FatTree::printSwitchEdge()
 				if (iBoucle3 % 2 == 0)
 					fichier << "[" << iBoucle3 + 1 << "]  \"Aggr(" << iBoucle1 << " " << (k / 2) + iBoucle3 / 2 << " " << 1 << ")\"[" << (iBoucle2 + 1) * 2 << "]" << endl;
 				else 
-				{
-					fichier << "[" << iBoucle3 + 1 << "]  \"Node(" << numHost << ")\"[1]" << endl;
-					numHost++;
-				}
+					fichier << "[" << iBoucle3 + 1 << "]  \"Node(" << numHost++ << ")\"[1]" << endl;
 			}
 		}
 	}
