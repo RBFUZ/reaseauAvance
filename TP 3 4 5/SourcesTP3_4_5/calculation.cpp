@@ -72,15 +72,18 @@ int Calculation::getHopCount(int fromId, int toId)
  */
 int Calculation::calculate() 
 {
-	int minHop = 0; //Min value
+	int minHop = -1, nbHop;
+	getHopCount(0, 8);
 
-	minHop = getHopCount(0,8);
+	/*for (int i = 0; i < topologyTable.getHostCount(); i++)
+		for (int j = 0; j < topologyTable.getHostCount(); j++)
+			if (i != j)
+			{
+				nbHop = getHopCount(i, j);
 
-	//TODO 
-	//Implémenter l'algo du calcul du nombre de sauts
-	//Aide : Pour recueperer le nombre de saut de source vers destination -> getHopCount(source, destination);
-	//Aide : Pour recuperer le nombre de HCA -> topologyTable.getHostCount();
-	//retourner le minimum trouver.
+				if (nbHop < minHop || minHop == -1) // Besoin de la condition -1 car il faut bien initialiser une première fois la valeur minHop.
+					minHop = nbHop;
+			}*/
 
 	return minHop;
 }
