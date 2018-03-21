@@ -45,25 +45,16 @@ int Calculation::getHopCount(int fromId, int toId)
 	int portDeSortie;
 	string nameNextSwitch = fromHost->dstName;
 
-	cout << "------------------------------------------------------" << endl;
-	cout << "Src : " << fromHost->name << " Dest : " << toHost->name << endl << endl;
-	cout << "Nom du switch suivant : " << nameNextSwitch << endl;
-
 	while (nameNextSwitch.compare(toHost->name) != 0)
 	{
 		route = routingTable.getTableByName(nameNextSwitch);
 		switchNode = topologyTable.getSwitchByName(nameNextSwitch);
 
 		portDeSortie = route->outport.at(distance(route->dstInfo.begin(), find(route->dstInfo.begin(), route->dstInfo.end(), toHost->name)));
-		cout << "Port de sortie : " << portDeSortie << endl;
-
 		nameNextSwitch = switchNode->dstName.at(distance(switchNode->srcPort.begin(), find(switchNode->srcPort.begin(), switchNode->srcPort.end(), portDeSortie)));
-		cout << "Nom du switch suivant : " << nameNextSwitch << endl;
 
 		count++;
 	}
-
-	cout << "From " << fromHost->name << " to " << toHost->name << ": Hop Count = " << count << endl;
 	return count;
 }
 
@@ -72,19 +63,25 @@ int Calculation::getHopCount(int fromId, int toId)
  */
 int Calculation::calculate() 
 {
-	int minHop = -1, nbHop;
+	int cpt, maxVal = 0, hopCount;
 
 	for (int i = 0; i < topologyTable.getHostCount(); i++)
+	{
+		cpt = 0;
 		for (int j = 0; j < topologyTable.getHostCount(); j++)
+		{
 			if (i != j)
 			{
-				nbHop = getHopCount(i, j);
+				hopCount = getHopCount(i, j);
 
-				if (nbHop < minHop || minHop == -1) // Besoin de la condition -1 car il faut bien initialiser une première fois la valeur minHop.
-					minHop = nbHop;
+				if (hopCount > cpt)
+					cpt = hopCount;
 			}
-
-	return minHop;
+		}
+		if (cpt > maxVal)
+			maxVal = cpt;
+	}
+	return maxVal;
 }
 
 /**

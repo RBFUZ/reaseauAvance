@@ -41,9 +41,9 @@ int main(int argc, char *argv[])
 	//getchar();
 	//routecalc.printRouting();
 
-	//cout << "Number of hops calculation" << endl;
-	//getchar();
-	cout<<endl<< "\tMinimum number of hops = " << routecalc.calculate() << endl;
+	cout << "Number of hops calculation" << endl;
+	getchar();
+	cout<<endl<< "Maximum number of hops = " << routecalc.calculate() << endl;
 
 	//cout << "Route balancing " << endl;
 	//getchar();
